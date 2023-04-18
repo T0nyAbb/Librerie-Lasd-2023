@@ -97,12 +97,12 @@ public:
 
   // Specific member function (inherited from SortableLinearContainer)
 
-  void Sort() noexcept override; // Override SortableLinearContainer member
+  void Sort() override; // Override SortableLinearContainer member
 
 protected:
-
+  
   // Auxiliary functions, if necessary!
-
+  void BubbleSort();
 };
 
 /* ************************************************************************** */

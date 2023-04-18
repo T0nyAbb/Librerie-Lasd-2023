@@ -53,20 +53,20 @@ public:
 
   using FoldFunctor = std::function<void(const Data &, void *)>;
 
-  // type Fold(arguments) specifiers;
+  virtual void Fold(const FoldFunctor, void*) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from TestableContainer)
 
-  virtual bool Exists(const Data) const noexcept override; // Override TestableContainer member
+  virtual bool Exists(const Data&) const noexcept override; // Override TestableContainer member
 
 };
 
 /* ************************************************************************** */
 
 template <typename Data>
-class PreOrderFoldableContainer {
+class PreOrderFoldableContainer: public virtual FoldableContainer<Data> {
                                   // Must extend FoldableContainer<Data>
 
 private:
@@ -80,21 +80,21 @@ protected:
 public:
 
   // Destructor
-  // ~PreOrderFoldableContainer() specifiers
+  virtual ~PreOrderFoldableContainer() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument); // Copy assignment of abstract types should not be possible.
+  PreOrderFoldableContainer& operator=(const PreOrderFoldableContainer&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  // type operator=(argument); // Move assignment of abstract types should not be possible.
+  PreOrderFoldableContainer& operator=(PreOrderFoldableContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers; // Comparison of abstract types might not be possible.
-  // type operator!=(argument) specifiers; // Comparison of abstract types might not be possible.
+  bool operator==(const PreOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator!=(const PreOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
 
   /* ************************************************************************ */
 
@@ -102,20 +102,20 @@ public:
 
   using typename FoldableContainer<Data>::FoldFunctor;
 
-  // type PreOrderFold(arguments) specifiers;
+  virtual void PreOrderFold(FoldFunctor, void*) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from FoldableContainer)
 
-  // type Fold(arguments) specifiers; // Override FoldableContainer member
+  virtual void Fold(FoldFunctor, void*) const override; // Override FoldableContainer member
 
 };
 
 /* ************************************************************************** */
 
 template <typename Data>
-class PostOrderFoldableContainer {
+class PostOrderFoldableContainer: public virtual FoldableContainer<Data> {
                                   // Must extend FoldableContainer<Data>
 
 private:
@@ -129,35 +129,35 @@ protected:
 public:
 
   // Destructor
-  // ~PostOrderFoldableContainer() specifiers
+  virtual ~PostOrderFoldableContainer() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument); // Copy assignment of abstract types should not be possible.
+  PostOrderFoldableContainer& operator=(const PostOrderFoldableContainer&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  // type operator=(argument); // Move assignment of abstract types should not be possible.
+  PostOrderFoldableContainer& operator=(PostOrderFoldableContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers; // Comparison of abstract types might not be possible.
-  // type operator!=(argument) specifiers; // Comparison of abstract types might not be possible.
+  bool operator==(const PostOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator!=(const PostOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
 
   /* ************************************************************************ */
 
   // Specific member function
 
-  // using typename FoldableContainer<Data>::FoldFunctor;
+  using typename FoldableContainer<Data>::FoldFunctor;
 
-  // type PostOrderFold(arguments) specifiers;
+  virtual void PostOrderFold(FoldFunctor, void*) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from FoldableContainer)
 
-  // type Fold(arguments) specifiers; // Override FoldableContainer member
+  virtual void Fold(FoldFunctor, void*) const override; // Override FoldableContainer member
 
 };
 

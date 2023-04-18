@@ -33,19 +33,19 @@ protected:
   struct Node {
 
     // Data
-    Data element;
+    Data info;
     Node* next = nullptr;
 
     /* ********************************************************************** */
 
     // Specific constructors
-    inline Node(const Data & dat) : element(dat) {};
+    inline Node(const Data & dat) : info(dat) {};
     inline Node(Data &&) noexcept;
 
     /* ********************************************************************** */
 
     // Copy constructor
-    inline Node(const Node & nod) : element(nod.element) {};
+    inline Node(const Node & nod) : info(nod.info) {};
 
     // Move constructor
     inline Node(Node && nod) noexcept;
@@ -54,12 +54,14 @@ protected:
     /* ********************************************************************** */
 
     // Destructor
+    virtual ~Node() = default;
     
 
     /* ********************************************************************** */
 
     // Comparison operators
-    // ...
+    bool operator==(const Node&) const noexcept;
+    bool operator!=(const Node&) const noexcept;
 
     /* ********************************************************************** */
 
@@ -68,19 +70,20 @@ protected:
     // ...
 
   };
-
+  Node* head = nullptr;
+  Node* tail = nullptr;
   // ...
 
 public:
 
   // Default constructor
-   List() = default;
+  List() = default;
 
   /* ************************************************************************ */
 
   // Specific constructor
-  // List(argument) specifiers; // A list obtained from a MappableContainer
-  // List(argument) specifiers; // A list obtained from a MutableMappableContainer
+  List(const MappableContainer<Data>&); // A list obtained from a MappableContainer
+  List(const MutableMappableContainer<Data>&); // A list obtained from a MutableMappableContainer
 
   /* ************************************************************************ */
 
@@ -113,27 +116,27 @@ public:
 
   // Specific member functions
 
-  // type InsertAtFront(argument) specifier; // Copy of the value
-  // type InsertAtFront(argument) specifier; // Move of the value
-  // type RemoveFromFront() specifier; // (must throw std::length_error when empty)
-  // type FrontNRemove() specifier; // (must throw std::length_error when empty)
+  void InsertAtFront(const Data&) noexcept; // Copy of the value
+  void InsertAtFront(Data&&) noexcept; // Move of the value
+  void RemoveFromFront(); // (must throw std::length_error when empty)
+  Data FrontNRemove(); // (must throw std::length_error when empty)
 
-  // type InsertAtBack(argument) specifier; // Copy of the value
-  // type InsertAtBack(argument) specifier; // Move of the value
+  void InsertAtBack(const Data&) noexcept; // Copy of the value
+  void InsertAtBack(Data&&) noexcept; // Move of the value
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  virtual void Clear() override; // Override ClearableContainer member
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from DictionaryContainer)
 
-  // type Insert(argument) specifier; // Copy of the value
-  // type Insert(argument) specifier; // Move of the value
-  // type Remove(argument) specifier;
+  bool Insert(const Data&); // Copy of the value
+  bool Insert(Data&&) noexcept; // Move of the value
+  bool Remove(const Data&);
 
   /* ************************************************************************ */
 
@@ -152,61 +155,61 @@ public:
 
   // Specific member function (inherited from FoldableContainer)
 
-  // using typename FoldableContainer<Data>::FoldFunctor;
+  using typename FoldableContainer<Data>::FoldFunctor;
 
-  // type Fold(arguments) specifiers; // Override FoldableContainer member
+  void Fold(const FoldFunctor, void*) const override; // Override FoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderFoldableContainer)
 
-  // type PreOrderFold(arguments) specifiers; // Override PreOrderFoldableContainer member
+  void PreOrderFold(const FoldFunctor, void*) const override; // Override PreOrderFoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderFoldableContainer)
 
-  // type PostOrderFold(arguments) specifiers; // Override PostOrderFoldableContainer member
+  void PostOrderFold(const FoldFunctor, void*) const override; // Override PostOrderFoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  // using typename MappableContainer<Data>::MapFunctor;
+  using typename MappableContainer<Data>::MapFunctor;
 
-  // type Map(argument) specifiers; // Override MappableContainer member
+  void Map(MapFunctor) override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  // type PreOrderMap(argument) specifiers; // Override PreOrderMappableContainer member
+  void PreOrderMap(MapFunctor) override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  // type PostOrderMap(argument) specifiers; // Override PostOrderMappableContainer member
+  void PostOrderMap(MapFunctor) override; // Override PostOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutableMappableContainer)
 
-  // using typename MutableMappableContainer<Data>::MutableMapFunctor;
+  using typename MutableMappableContainer<Data>::MutableMapFunctor;
 
-  // type Map(argument) specifiers; // Override MutableMappableContainer member
+  void Map(MutableMapFunctor) override; // Override MutableMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutablePreOrderMappableContainer)
 
-  // type PreOrderMap(argument) specifiers; // Override MutablePreOrderMappableContainer member
+  void PreOrderMap(MutableMapFunctor) override; // Override MutablePreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MutablePostOrderMappableContainer)
 
-  // type PostOrderMap(argument) specifiers; // Override MutablePostOrderMappableContainer member
+  void PostOrderMap(MutableMapFunctor) override; // Override MutablePostOrderMappableContainer member
 
 protected:
 

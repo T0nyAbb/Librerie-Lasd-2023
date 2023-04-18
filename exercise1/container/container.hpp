@@ -127,14 +127,14 @@ public:
 
   // Specific member function
 
-  virtual void Resize(const unsigned long);
+  virtual void Resize(const unsigned long) = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
   inline void Clear() override {
-
+    Resize(0);
   }; // Override ClearableContainer member
 
 };
