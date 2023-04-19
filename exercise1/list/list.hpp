@@ -48,7 +48,7 @@ protected:
     inline Node(const Node & nod) : info(nod.info) {};
 
     // Move constructor
-    inline Node(Node && nod) noexcept;
+    inline Node(Node &&) noexcept;
     
 
     /* ********************************************************************** */
@@ -83,7 +83,7 @@ public:
 
   // Specific constructor
   List(const MappableContainer<Data>&); // A list obtained from a MappableContainer
-  List(const MutableMappableContainer<Data>&); // A list obtained from a MutableMappableContainer
+  List(MutableMappableContainer<Data>&&); // A list obtained from a MutableMappableContainer
 
   /* ************************************************************************ */
 
@@ -142,14 +142,14 @@ public:
 
   // Specific member functions (inherited from LinearContainer)
 
-  // type operator[](argument) specifiers; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
-  // type operator[](argument) specifiers; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
+  const Data& operator[](const unsigned long) const override; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
+  Data& operator[](const unsigned long) override; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
 
-  // type Front() specifiers; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  // type Front() specifiers; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  const Data& Front() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  Data& Front() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
-  // type Back() specifiers; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  // type Back() specifiers; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  const Data& Back() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  Data& Back() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
@@ -215,22 +215,22 @@ protected:
 
   // Auxiliary member functions (for PreOrderFoldableContainer & PostOrderFoldableContainer)
 
-  // type PreOrderFold(arguments) specifiers; // Accessory function executing from one point of the list onwards
-  // type PostOrderFold(arguments) specifiers; // Accessory function executing from one point of the list onwards
+  void PreOrderFold(FoldFunctor, void*) const override; // Accessory function executing from one point of the list onwards
+  void PostOrderFold(FoldFunctor, void*) const override; // Accessory function executing from one point of the list onwards
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for PreOrderMappableContainer & PostOrderMappableContainer)
 
-  // type PreOrderMap(arguments) specifiers; // Accessory function executing from one point of the list onwards
-  // type PostOrderMap(arguments) specifiers; // Accessory function executing from one point of the list onward
+  void PreOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for MutablePreOrderMappableContainer & MutablePostOrderMappableContainer)
 
-  // type PreOrderMap(arguments) specifiers; // Accessory function executing from one point of the list onwards
-  // type PostOrderMap(arguments) specifiers; // Accessory function executing from one point of the list onward
+  void PreOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
 

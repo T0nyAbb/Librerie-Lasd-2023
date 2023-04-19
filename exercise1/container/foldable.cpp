@@ -20,6 +20,18 @@ bool FoldableContainer<Data>::Exists(const Data& data) const noexcept {
     return check;
 }
 
+//Fold Pre
+template <typename Data>
+void PreOrderFoldableContainer<Data>::Fold(FoldFunctor fun, void* acc) const {
+    PreOrderFold(fun, acc);
+}
+
+//Fold Post
+template <typename Data>
+void PostOrderFoldableContainer<Data>::Fold(FoldFunctor fun, void* acc) const {
+    PostOrderFold(fun, acc);
+}
+
 /* ************************************************************************** */
 
 }
