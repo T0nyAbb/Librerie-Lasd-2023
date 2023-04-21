@@ -116,12 +116,12 @@ public:
 
   // Specific member functions
 
-  void InsertAtFront(const Data&) noexcept; // Copy of the value
+  void InsertAtFront(const Data&); // Copy of the value
   void InsertAtFront(Data&&) noexcept; // Move of the value
   void RemoveFromFront(); // (must throw std::length_error when empty)
   Data FrontNRemove(); // (must throw std::length_error when empty)
 
-  void InsertAtBack(const Data&) noexcept; // Copy of the value
+  void InsertAtBack(const Data&); // Copy of the value
   void InsertAtBack(Data&&) noexcept; // Move of the value
 
   /* ************************************************************************ */
@@ -157,19 +157,19 @@ public:
 
   using typename FoldableContainer<Data>::FoldFunctor;
 
-  void Fold(const FoldFunctor, void*) const override; // Override FoldableContainer member
+  void Fold(FoldFunctor, void*) const override; // Override FoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderFoldableContainer)
 
-  void PreOrderFold(const FoldFunctor, void*) const override; // Override PreOrderFoldableContainer member
+  void PreOrderFold(FoldFunctor, void*) const override; // Override PreOrderFoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderFoldableContainer)
 
-  void PostOrderFold(const FoldFunctor, void*) const override; // Override PostOrderFoldableContainer member
+  void PostOrderFold(FoldFunctor, void*) const override; // Override PostOrderFoldableContainer member
 
   /* ************************************************************************ */
 
@@ -215,24 +215,28 @@ protected:
 
   // Auxiliary member functions (for PreOrderFoldableContainer & PostOrderFoldableContainer)
 
-  void PreOrderFold(FoldFunctor, void*) const override; // Accessory function executing from one point of the list onwards
-  void PostOrderFold(FoldFunctor, void*) const override; // Accessory function executing from one point of the list onwards
+  void PreOrderFold(FoldFunctor, void*) const; // Accessory function executing from one point of the list onwards
+  void PostOrderFold(FoldFunctor, void*) const; // Accessory function executing from one point of the list onwards
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for PreOrderMappableContainer & PostOrderMappableContainer)
 
-  void PreOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onwards
-  void PostOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onward
+  void PreOrderMap(MapFunctor); // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MapFunctor); // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for MutablePreOrderMappableContainer & MutablePostOrderMappableContainer)
 
-  void PreOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onwards
-  void PostOrderMap(MapFunctor) override; // Accessory function executing from one point of the list onward
+  void PreOrderMap(MutableMapFunctor); // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MutableMapFunctor); // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
+
+  public:
+
+  bool Exists(const Data&) const noexcept;
 
 };
 

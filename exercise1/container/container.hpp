@@ -133,7 +133,7 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  inline void Clear() override {
+  inline virtual void Clear() override {
     Resize(0);
   }; // Override ClearableContainer member
 

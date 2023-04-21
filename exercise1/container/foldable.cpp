@@ -10,10 +10,11 @@ namespace lasd {
 //Exists
 template <typename Data>
 bool FoldableContainer<Data>::Exists(const Data& data) const noexcept {
+    Data dat = data
     bool check = false;
-    Fold({[this, &data] (const Data& d, void* res) {
-        if(d==data) {
-            *((bool)*res)=true;
+    Fold({[this, &dat] (const Data& d, void* res) {
+        if(d==dat) {
+            *((bool*)res)=true;
         }
     }
     }, &check);

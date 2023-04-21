@@ -23,7 +23,7 @@ private:
 
 protected:
 
-  // ...
+  using Container::size;
 
 public:
 
@@ -61,21 +61,21 @@ public:
 
   // Specific member function (inherited from FoldableContainer)
 
-   using typename FoldableContainer<Data>::FoldFunctor;
+  using typename FoldableContainer<Data>::FoldFunctor;
 
-  virtual void Fold(FoldFunctor, void*) override; // Override FoldableContainer member
+  virtual void Fold(FoldFunctor, void*) const override; // Override FoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderFoldableContainer)
 
-  virtual void PreOrderFold(FoldFunctor, void*) override; // Override PreOrderFoldableContainer member
+  virtual void PreOrderFold(FoldFunctor, void*) const override; // Override PreOrderFoldableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderFoldableContainer)
 
-  virtual void PostOrderFold(FoldFunctor, void*) override; // Override PostOrderFoldableContainer member
+  virtual void PostOrderFold(FoldFunctor, void*) const override; // Override PostOrderFoldableContainer member
 
   /* ************************************************************************ */
 
@@ -131,7 +131,7 @@ private:
 
 protected:
 
-  // ...
+  using Container::size;
 
 public:
 
@@ -149,8 +149,8 @@ public:
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const Data&) const noexcept; // Comparison of abstract types is possible.
-  bool operator!=(const Data&) const noexcept; // Comparison of abstract types is possible.
+  bool operator==(const SortableLinearContainer&) const noexcept; // Comparison of abstract types is possible.
+  bool operator!=(const SortableLinearContainer&) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 

@@ -50,7 +50,7 @@ public:
   /* ************************************************************************ */
 
   // Destructor
-  ~StackLst();
+  virtual ~StackLst();
 
   /* ************************************************************************ */
 
@@ -81,7 +81,7 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  // using List<Data>::Clear;
+   using List<Data>::Clear();
 
 };
 

@@ -167,7 +167,7 @@ const Data& Vector<Data>::Front() const {
 //Front mutable
 template <typename Data>
 Data& Vector<Data>::Front() {
-        if(size==0) {
+    if(size==0) {
         throw std::length_error("Empty Vector!");
     } else {
         return Elements[0];
