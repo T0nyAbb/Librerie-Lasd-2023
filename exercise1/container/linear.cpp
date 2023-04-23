@@ -11,11 +11,13 @@ namespace lasd {
 
 //OP ==
 template <typename Data>
-bool LinearContainer<Data>::operator==(const LinearContainer& other) const noexcept {
+bool LinearContainer<Data>::operator==(const LinearContainer<Data>& other) const noexcept {
+    //using LinearContainer::operator[];
     if(size!=other.size) {
         return false;
     } for(unsigned long i = 0; i<size; i++) {
-        if(operator[](i) != other.operator[](i)) {
+        if(operator[](i) != other.operator[](i)) 
+        {
             return false;
         }
     }
@@ -24,8 +26,9 @@ bool LinearContainer<Data>::operator==(const LinearContainer& other) const noexc
 
 //OP !=
 template <typename Data>
-bool LinearContainer<Data>::operator!=(const LinearContainer& other) const noexcept {
-    return !(operator==(other));
+bool LinearContainer<Data>::operator!=(const LinearContainer<Data>& other) const noexcept {
+    return !(*this == other);
+    //return !(operator==(other));
 }
 
 //Fold
@@ -45,20 +48,21 @@ void LinearContainer<Data>::PreOrderFold(FoldFunctor fun, void* acc) const {
 //PostOrderFold
 template <typename Data>
 void LinearContainer<Data>::PostOrderFold(FoldFunctor fun, void* acc) const {
-    for(unsigned long i = size-1; i>0 i--) {
-        fun(operator[](i), acc);
+    unsigned long i = size;
+    while(i>0) {
+        fun(operator[](--i), acc);
     }
 }
 
 //Map
 template <typename Data>
-void LinearContainer<Data>::Map(MapFunctor fun) {
+void LinearContainer<Data>::Map(MapFunctor fun) const {
     PreOrderMap(fun);
 }
 
 //PreOrderMap
 template <typename Data>
-void LinearContainer<Data>::PreOrderMap(MapFunctor fun) {
+void LinearContainer<Data>::PreOrderMap(MapFunctor fun) const {
     for(unsigned long i = 0; i<size; i++) {
         fun(operator[](i));
     }
@@ -66,9 +70,10 @@ void LinearContainer<Data>::PreOrderMap(MapFunctor fun) {
 
 //PostOrderMap
 template <typename Data>
-void LinearContainer<Data>::PostOrderMap(MapFunctor fun) {
-    for(unsigned long i = size-1; i>0 i--) {
-        fun(operator[](i));
+void LinearContainer<Data>::PostOrderMap(MapFunctor fun) const {
+    unsigned long i = size;
+    while(i>0) {
+        fun(operator[](--i));
     }    
 }
 
@@ -89,8 +94,9 @@ void LinearContainer<Data>::PreOrderMap(MutableMapFunctor fun) {
 //PostOrderMap mutable
 template <typename Data>
 void LinearContainer<Data>::PostOrderMap(MutableMapFunctor fun) {
-    for(unsigned long i = size-1; i>0 i--) {
-        fun(operator[](i));
+    unsigned long i = size;
+    while(i>0) {
+        fun(operator[](--i));
     }    
 }
 
@@ -98,20 +104,22 @@ void LinearContainer<Data>::PostOrderMap(MutableMapFunctor fun) {
 
 //OP ==
 template <typename Data>
-bool SortableLinearContainer<Data>::operator==(const SortableLinearContainer& other) const noexcept {
-    if(size!=other.size) {
+bool SortableLinearContainer<Data>::operator==(const SortableLinearContainer<Data>& other) const noexcept {
+  return LinearContainer<Data>::operator==(other);
+   /* if(size!=other.size) {
         return false;
     } for(unsigned long i = 0; i<size; i++) {
         if(operator[](i) != other.operator[](i)) {
             return false;
         }
     }
-    return true;    
+    return true; */   
 }
+
 
 //OP !=
 template <typename Data>
-bool SortableLinearContainer<Data>::operator!=(const SortableLinearContainer& other) const noexcept {
+bool SortableLinearContainer<Data>::operator!=(const SortableLinearContainer<Data>& other) const noexcept {
     return !(operator==(other));
 }
 

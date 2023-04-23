@@ -18,7 +18,7 @@ void MappableContainer<Data>::Fold(FoldFunctor fun, void* acc) const {
 
 //Map (pre)
 template <typename Data>
-void PreOrderMappableContainer<Data>::Map(MapFunctor fun) {
+void PreOrderMappableContainer<Data>::Map(MapFunctor fun) const {
     PreOrderMap(fun);
 }
 
@@ -38,7 +38,7 @@ void PreOrderMappableContainer<Data>::PreOrderFold(FoldFunctor fun, void* acc) c
 
 //Map (post)
 template <typename Data>
-void PostOrderMappableContainer<Data>::Map(MapFunctor fun) {
+void PostOrderMappableContainer<Data>::Map(MapFunctor fun) const {
     PostOrderMap(fun);
 }
 

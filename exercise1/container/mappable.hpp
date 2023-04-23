@@ -53,7 +53,7 @@ public:
 
   using MapFunctor = std::function<void(const Data &)>;
 
-  virtual void Map(MapFunctor) = 0;
+  virtual void Map(MapFunctor) const = 0;
 
   /* ************************************************************************ */
 
@@ -105,13 +105,13 @@ public:
 
   using typename MappableContainer<Data>::MapFunctor;
 
-  virtual void PreOrderMap(MapFunctor) = 0;
+  virtual void PreOrderMap(MapFunctor) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  virtual void Map(MapFunctor) override; // Override MappableContainer member
+  virtual void Map(MapFunctor) const override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
@@ -169,13 +169,13 @@ public:
 
   using typename MappableContainer<Data>::MapFunctor;
 
-  virtual void PostOrderMap(MapFunctor) = 0;
+  virtual void PostOrderMap(MapFunctor) const = 0;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from MappableContainer)
 
-  virtual void Map(MapFunctor) override; // Override MappableContainer member
+  virtual void Map(MapFunctor) const override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
@@ -417,7 +417,7 @@ public:
 /* ************************************************************************** */
 
 template <typename Data>
-class MutablePostOrderMappableContainer: public virtual MutableMappableContainer<Data>, PostOrderMappableContainer<Data> {
+class MutablePostOrderMappableContainer: public virtual MutableMappableContainer<Data>, public virtual PostOrderMappableContainer<Data> {
                                           // Must extend MutableMappableContainer<Data>,
                                           //             PostOrderMappableContainer<Data>
 

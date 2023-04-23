@@ -14,11 +14,12 @@ Vector<Data>::Vector(const unsigned long newsize) {
 
 template <typename Data>
 Vector<Data>::Vector(const MappableContainer<Data>& con) {
-    size = con.size;
-    Elements = new Data[size];
+    size = con.Size();
+    Elements = new Data[size] {};
     unsigned long idx = 0;
     con.Map([this, & idx](const Data & data) {
-        Elements[idx++] = data;
+        Elements[idx] = data;
+        idx++;
     }
     );
 }
@@ -26,11 +27,12 @@ Vector<Data>::Vector(const MappableContainer<Data>& con) {
 template <typename Data>
 Vector<Data>::Vector(MutableMappableContainer<Data>&& con) {
     size = con.Size();
-    Elements = new Data[size];
+    Elements = new Data[size] {};
     unsigned long idx = 0;
-    con.Map([this, &idx](const Data & data) {
-        Elements[idx++] = std::move(data);
-    })
+    con.Map([this, &idx](Data & data) {
+        Elements[idx] = std::move(data);
+        idx++;
+    });
 }
 
 
@@ -40,7 +42,7 @@ Vector<Data>::Vector(MutableMappableContainer<Data>&& con) {
 template <typename Data>
 Vector<Data>::Vector(const Vector<Data>& vec) {
     size = vec.size;
-    Elements = new Data[size];
+    Elements = new Data[size] {};
     std::copy(vec.Elements, vec.Elements + size, Elements);
 }
 
@@ -197,6 +199,7 @@ Data& Vector<Data>::Back() {
 //Sort
 template <typename Data>
 void Vector<Data>::Sort() {
+    if(size==0 || size==1) return;
     BubbleSort();
 } 
 

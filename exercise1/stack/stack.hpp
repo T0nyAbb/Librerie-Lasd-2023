@@ -32,22 +32,22 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  Stack& operator=(const Stack&) = delete; // Copy assignment of abstract types should not be possible.
+  Stack& operator=(const Stack<Data>&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  Stack& operator=(Stack&&) noexcept = delete; // Move assignment of abstract types should not be possible.
+  Stack& operator=(Stack<Data>&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const Stack&) const noexcept = delete; // Comparison of abstract types might not be possible.
-  bool operator!=(const Stack&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator==(const Stack<Data>&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator!=(const Stack<Data>&) const noexcept = delete; // Comparison of abstract types might not be possible.
 
   /* ************************************************************************ */
 
   // Specific member functions
 
-  virtual Data& Top() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual const Data& Top() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
   virtual Data& Top() = 0; // (mutable version; concrete function must throw std::length_error when empty)
   virtual void Pop() = 0; // (concrete function must throw std::length_error when empty)
   virtual Data TopNPop() = 0; // (concrete function must throw std::length_error when empty)

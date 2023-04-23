@@ -24,80 +24,83 @@ private:
 
 protected:
 
-  // using Vector<Data>::???;
-
+  using Vector<Data>::size;
+  using Vector<Data>::Elements;
+  unsigned long head = 0;
+  unsigned long tail = 0;
+  unsigned long sentinel = 0;
   // ...
 
 public:
 
   // Default constructor
-  // QueueVec() specifier;
+  QueueVec();
 
   /* ************************************************************************ */
 
   // Specific constructor
-  // QueueVec(argument) specifiers; // A queue obtained from a MappableContainer
-  // QueueVec(argument) specifiers; // A queue obtained from a MutableMappableContainer
+  QueueVec(const MappableContainer<Data>&); // A queue obtained from a MappableContainer
+  QueueVec(MutableMappableContainer<Data>&&) noexcept; // A queue obtained from a MutableMappableContainer
 
   /* ************************************************************************ */
 
   // Copy constructor
-  // QueueVec(argument);
+  QueueVec(const QueueVec<Data>&);
 
   // Move constructor
-  // QueueVec(argument);
+  QueueVec(QueueVec<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
   // Destructor
-  // ~QueueVec() specifier;
+  ~QueueVec() = default;
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument);
+  QueueVec<Data>& operator=(const QueueVec<Data>&);
 
   // Move assignment
-  // type operator=(argument);
+  QueueVec<Data>& operator=(QueueVec<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers;
-  // type operator!=(argument) specifiers;
+  bool operator==(const QueueVec&) const noexcept;
+  bool operator!=(const QueueVec&) const noexcept;
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Queue)
 
-  // type Head() specifiers; // Override Queue member (non-mutable version; must throw std::length_error when empty)
-  // type Head() specifiers; // Override Queue member (mutable version; must throw std::length_error when empty)
-  // type Dequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type HeadNDequeue() specifiers; // Override Queue member (must throw std::length_error when empty)
-  // type Enqueue(argument) specifiers; // Override Queue member (copy of the value)
-  // type Enqueue(argument) specifiers; // Override Queue member (move of the value)
+  const Data& Head() const override; // Override Queue member (non-mutable version; must throw std::length_error when empty)
+  Data& Head() override; // Override Queue member (mutable version; must throw std::length_error when empty)
+  void Dequeue() override; // Override Queue member (must throw std::length_error when empty)
+  Data HeadNDequeue() override; // Override Queue member (must throw std::length_error when empty)
+  void Enqueue(const Data&) override; // Override Queue member (copy of the value)
+  void Enqueue(Data&&) noexcept override; // Override Queue member (move of the value)
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from Container)
 
-  // type Empty() specifiers; // Override Container member
+  bool Empty() const noexcept override; // Override Container member
 
-  // type Size() specifiers; // Override Container member
+  unsigned long Size() const noexcept override; // Override Container member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  void Clear() override; // Override ClearableContainer member
 
 protected:
 
   // Auxiliary member functions
 
-  // type Expand() specifiers;
-  // type Reduce() specifiers;
-  // type SwapVectors(arguments) specifiers;
+  void Expand();
+  void Reduce();
+  //void SwapVectors(unsigned long newsize);
 
 };
 

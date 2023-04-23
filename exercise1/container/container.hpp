@@ -41,11 +41,11 @@ public:
 
   // Specific member functions
 
-  inline virtual bool Empty() const noexcept {
+  virtual bool Empty() const noexcept {
     return (size == 0);
   } // (concrete function should not throw exceptions)
 
-  inline virtual unsigned long Size() const noexcept {
+  virtual unsigned long Size() const noexcept {
     return size;
   } // (concrete function should not throw exceptions)
 
@@ -133,7 +133,7 @@ public:
 
   // Specific member function (inherited from ClearableContainer)
 
-  inline virtual void Clear() override {
+  virtual void Clear() override {
     Resize(0);
   }; // Override ClearableContainer member
 

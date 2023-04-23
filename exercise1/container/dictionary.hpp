@@ -33,10 +33,10 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  DictionaryContainer& operator=(const DictionaryContainer&) = delete; // Copy assignment of abstract types should not be possible.
+  DictionaryContainer<Data>& operator=(const DictionaryContainer&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  DictionaryContainer& operator=(DictionaryContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
+  DictionaryContainer<Data>& operator=(DictionaryContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 

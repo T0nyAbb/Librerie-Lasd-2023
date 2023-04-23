@@ -53,7 +53,7 @@ public:
 
   using FoldFunctor = std::function<void(const Data &, void *)>;
 
-  virtual void Fold(const FoldFunctor, void*) const = 0;
+  virtual void Fold(FoldFunctor, void*) const = 0;
 
   /* ************************************************************************ */
 
@@ -134,16 +134,16 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  PostOrderFoldableContainer& operator=(const PostOrderFoldableContainer&) = delete; // Copy assignment of abstract types should not be possible.
+  PostOrderFoldableContainer<Data>& operator=(const PostOrderFoldableContainer&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  PostOrderFoldableContainer& operator=(PostOrderFoldableContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
+  PostOrderFoldableContainer<Data>& operator=(PostOrderFoldableContainer&&) noexcept = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const PostOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
-  bool operator!=(const PostOrderFoldableContainer&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator==(const PostOrderFoldableContainer<Data>&) const noexcept = delete; // Comparison of abstract types might not be possible.
+  bool operator!=(const PostOrderFoldableContainer<Data>&) const noexcept = delete; // Comparison of abstract types might not be possible.
 
   /* ************************************************************************ */
 

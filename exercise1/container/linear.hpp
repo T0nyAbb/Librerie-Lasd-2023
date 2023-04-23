@@ -33,29 +33,29 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  LinearContainer& operator=(const LinearContainer&) = delete; // Copy assignment of abstract types should not be possible.
+  LinearContainer& operator=(const LinearContainer<Data>&) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  LinearContainer& operator=(LinearContainer&&) = delete; // Move assignment of abstract types should not be possible.
+  LinearContainer& operator=(LinearContainer<Data>&&) = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const LinearContainer&) const noexcept; // Comparison of abstract types is possible.
-  bool operator!=(const LinearContainer&) const noexcept; // Comparison of abstract types is possible.
+  bool operator==(const LinearContainer<Data>&) const noexcept; // Comparison of abstract types is possible.
+  bool operator!=(const LinearContainer<Data>&) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 
   // Specific member functions
 
-  const Data& operator[](const unsigned long) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)
-  Data& operator[](const unsigned long) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
+  virtual const Data& operator[](const unsigned long) const = 0; // (non-mutable version; concrete function must throw std::out_of_range when out of range)
+  virtual Data& operator[](const unsigned long) = 0; // (mutable version; concrete function must throw std::out_of_range when out of range)
 
-  const Data& Front() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
-  Data& Front() = 0; // (mutable version; concrete function must throw std::length_error when empty)
+  virtual const Data& Front() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual Data& Front() = 0; // (mutable version; concrete function must throw std::length_error when empty)
 
-  const Data& Back() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
-  Data& Back() = 0; // (mutable version; concrete function must throw std::length_error when empty)
+  virtual const Data& Back() const = 0; // (non-mutable version; concrete function must throw std::length_error when empty)
+  virtual Data& Back() = 0; // (mutable version; concrete function must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
@@ -83,19 +83,19 @@ public:
 
    using typename MappableContainer<Data>::MapFunctor;
 
-  virtual void Map(MapFunctor) override; // Override MappableContainer member
+  virtual void Map(MapFunctor) const override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  virtual void PreOrderMap(MapFunctor) override; // Override PreOrderMappableContainer member
+  virtual void PreOrderMap(MapFunctor) const override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  virtual void PostOrderMap(MapFunctor) override; // Override PostOrderMappableContainer member
+  virtual void PostOrderMap(MapFunctor) const override; // Override PostOrderMappableContainer member
 
   /* ************************************************************************ */
 
@@ -141,16 +141,16 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  SortableLinearContainer& operator=(const SortableLinearContainer &) = delete; // Copy assignment of abstract types should not be possible.
+  SortableLinearContainer& operator=(const SortableLinearContainer<Data> &) = delete; // Copy assignment of abstract types should not be possible.
 
   // Move assignment
-  SortableLinearContainer& operator=(SortableLinearContainer&&) = delete; // Move assignment of abstract types should not be possible.
+  SortableLinearContainer& operator=(SortableLinearContainer<Data>&&) = delete; // Move assignment of abstract types should not be possible.
 
   /* ************************************************************************ */
 
   // Comparison operators
-  bool operator==(const SortableLinearContainer&) const noexcept; // Comparison of abstract types is possible.
-  bool operator!=(const SortableLinearContainer&) const noexcept; // Comparison of abstract types is possible.
+  bool operator==(const SortableLinearContainer<Data>&) const noexcept; // Comparison of abstract types is possible.
+  bool operator!=(const SortableLinearContainer<Data>&) const noexcept; // Comparison of abstract types is possible.
 
   /* ************************************************************************ */
 

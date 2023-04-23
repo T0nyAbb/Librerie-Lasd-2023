@@ -10,7 +10,7 @@ namespace lasd {
 //Exists
 template <typename Data>
 bool FoldableContainer<Data>::Exists(const Data& data) const noexcept {
-    Data dat = data
+    Data dat = data;
     bool check = false;
     Fold({[this, &dat] (const Data& d, void* res) {
         if(d==dat) {

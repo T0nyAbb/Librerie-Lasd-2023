@@ -88,10 +88,10 @@ public:
   /* ************************************************************************ */
 
   // Copy constructor
-  List(const List&);
+  List(const List<Data>&);
 
   // Move constructor
-  List(List &&) noexcept;
+  List(List<Data> &&) noexcept;
 
   /* ************************************************************************ */
 
@@ -101,10 +101,10 @@ public:
   /* ************************************************************************ */
 
   // Copy assignment
-  List& operator=(const List&);
+  List& operator=(const List<Data>&);
 
-  // Move assignment
-  List& operator=(List&&) noexcept;
+  // Move assignment<
+  List& operator=(List<Data>&&) noexcept;
 
   /* ************************************************************************ */
 
@@ -177,19 +177,19 @@ public:
 
   using typename MappableContainer<Data>::MapFunctor;
 
-  void Map(MapFunctor) override; // Override MappableContainer member
+  void Map(MapFunctor) const override; // Override MappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PreOrderMappableContainer)
 
-  void PreOrderMap(MapFunctor) override; // Override PreOrderMappableContainer member
+  void PreOrderMap(MapFunctor) const override; // Override PreOrderMappableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from PostOrderMappableContainer)
 
-  void PostOrderMap(MapFunctor) override; // Override PostOrderMappableContainer member
+  void PostOrderMap(MapFunctor) const override; // Override PostOrderMappableContainer member
 
   /* ************************************************************************ */
 
@@ -215,22 +215,22 @@ protected:
 
   // Auxiliary member functions (for PreOrderFoldableContainer & PostOrderFoldableContainer)
 
-  void PreOrderFold(FoldFunctor, void*) const; // Accessory function executing from one point of the list onwards
-  void PostOrderFold(FoldFunctor, void*) const; // Accessory function executing from one point of the list onwards
+  void PreOrderFold(FoldFunctor, void*, Node*) const; // Accessory function executing from one point of the list onwards
+  void PostOrderFold(FoldFunctor, void*, Node*) const; // Accessory function executing from one point of the list onwards
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for PreOrderMappableContainer & PostOrderMappableContainer)
 
-  void PreOrderMap(MapFunctor); // Accessory function executing from one point of the list onwards
-  void PostOrderMap(MapFunctor); // Accessory function executing from one point of the list onward
+  void PreOrderMap(MapFunctor, Node*) const; // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MapFunctor, Node*) const; // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
 
   // Auxiliary member functions (for MutablePreOrderMappableContainer & MutablePostOrderMappableContainer)
 
-  void PreOrderMap(MutableMapFunctor); // Accessory function executing from one point of the list onwards
-  void PostOrderMap(MutableMapFunctor); // Accessory function executing from one point of the list onward
+  void PreOrderMap(MutableMapFunctor, Node*); // Accessory function executing from one point of the list onwards
+  void PostOrderMap(MutableMapFunctor, Node*); // Accessory function executing from one point of the list onward
 
   /* ************************************************************************ */
 
