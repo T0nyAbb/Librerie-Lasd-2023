@@ -206,9 +206,12 @@ void Vector<Data>::Sort() {
 //BubbleSort
 template <typename Data>
 void Vector<Data>::BubbleSort() {
-    for(unsigned int i=0; i<size; i++) {
-        for(unsigned int j=0; j+1<size-1; j++) {
-            std::swap(Elements[j], Elements[j+1]);
+    for(unsigned int i=0; i<size-1; i++) {
+        for(unsigned int j=0; j<size-1; j++) {
+            if(Elements[j]>Elements[j+1]) {
+                std::swap(Elements[j], Elements[j+1]);
+            }
+            
         }
     }
 }

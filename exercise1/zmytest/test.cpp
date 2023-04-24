@@ -17,18 +17,18 @@ void test() {
     std::string tipo = selezionaTipo();
     if(struttura=="1") {
         if(tipo=="1") {
-            lasd::Vector<int> vec;
+            lasd::Vector<int> vec(10);
             popolaVec(vec);
             menuVector(vec);
 
         }
         else if(tipo=="2") {
-            lasd::Vector<double> vec;
+            lasd::Vector<double> vec(10);
             popolaVec(vec);
             menuVector(vec);
         }
         else if(tipo=="3") {
-            lasd::Vector<std::string> vec;
+            lasd::Vector<std::string> vec(10);
             popolaVec(vec);
             menuVector(vec);
         }
@@ -166,6 +166,7 @@ void menuStack(lasd::Stack<T>& stk) {
     else if(scelta=="7") {
         stk.Clear();
         std::cout << "\nStack svuotato" << std::endl;
+        goto NextActionStack;
     }
     else if(scelta=="0") {
         stk.Clear();
