@@ -14,7 +14,7 @@ namespace lasd {
 /* ************************************************************************** */
 
 template <typename Data>
-class Vector {
+class Vector: public virtual ResizableContainer, public virtual SortableLinearContainer<Data>{
                 // Must extend ResizableContainer,
                 //             SortableLinearContainer<Data>
 
@@ -24,84 +24,85 @@ private:
 
 protected:
 
-  // using Container::???;
+  using Container::size;
+  Data* Elements = nullptr;
 
   // ...
 
 public:
 
   // Default constructor
-  // Vector() specifiers;
+   Vector() = default;
 
   /* ************************************************************************ */
 
   // Specific constructors
-  // Vector(argument) specifiers; // A vector with a given initial dimension
-  // Vector(argument) specifiers; // A vector obtained from a MappableContainer
-  // Vector(argument) specifiers; // A vector obtained from a MutableMappableContainer
+   Vector(const unsigned long); // A vector with a given initial dimension
+   Vector(const MappableContainer<Data> &); // A vector obtained from a MappableContainer
+   Vector(MutableMappableContainer<Data> &&); // A vector obtained from a MutableMappableContainer
 
   /* ************************************************************************ */
 
   // Copy constructor
-  // Vector(argument) specifiers;
+  Vector(const Vector<Data> &);
 
   // Move constructor
-  // Vector(argument) specifiers;
+  Vector(Vector<Data> &&) noexcept;
 
   /* ************************************************************************ */
 
   // Destructor
-  // ~Vector() specifiers;
+  virtual ~Vector();
 
   /* ************************************************************************ */
 
   // Copy assignment
-  // type operator=(argument) specifiers;
+  Vector & operator=(const Vector<Data> &);
 
   // Move assignment
-  // type operator=(argument) specifiers;
+  Vector & operator=(Vector<Data> &&) noexcept;
 
   /* ************************************************************************ */
 
   // Comparison operators
-  // type operator==(argument) specifiers;
-  // type operator!=(argument) specifiers;
+  inline bool operator==(const Vector<Data> &) const noexcept;
+  inline bool operator!=(const Vector<Data> &) const noexcept;
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ClearableContainer)
 
-  // type Clear() specifiers; // Override ClearableContainer member
+  void Clear() override; // Override ClearableContainer member
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from ResizableContainer)
 
-  // type Resize(argument) specifiers; // Override ResizableContainer member
+  void Resize(const unsigned long) override; // Override ResizableContainer member
 
   /* ************************************************************************ */
 
   // Specific member functions (inherited from LinearContainer)
 
-  // type operator[](argument) specifiers; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
-  // type operator[](argument) specifiers; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
+  const Data & operator[](const unsigned long) const override; // Override (NonMutable) LinearContainer member (must throw std::out_of_range when out of range)
+  Data & operator[](const unsigned long) override; // Override (Mutable) LinearContainer member (must throw std::out_of_range when out of range)
 
-  // type Front() specifiers; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  // type Front() specifiers; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  const Data & Front() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  Data & Front() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
-  // type Back() specifiers; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
-  // type Back() specifiers; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
+  const Data & Back() const override; // Override (NonMutable) LinearContainer member (must throw std::length_error when empty)
+  Data & Back() override; // Override (Mutable) LinearContainer member (must throw std::length_error when empty)
 
   /* ************************************************************************ */
 
   // Specific member function (inherited from SortableLinearContainer)
 
-  // type Sort() specifiers; // Override SortableLinearContainer member
+  void Sort() override; // Override SortableLinearContainer member
 
 protected:
-
+  
   // Auxiliary functions, if necessary!
-
+  void BubbleSort();
 };
 
 /* ************************************************************************** */
