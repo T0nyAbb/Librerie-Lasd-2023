@@ -97,7 +97,7 @@ void BreadthMappableContainer<Data>::Map(MapFunctor fun) const {
 //Fold (breadth)
 template <typename Data>
 void BreadthMappableContainer<Data>::Fold(FoldFunctor fun, void* acc) const {
-    BreadthFold(fun);
+    BreadthFold(fun, acc);
 }
 
 //BreadthFold

@@ -152,7 +152,7 @@ template <typename T>
 void funFrontNRemove(lasd::List<T>&);
 
 template <typename T>
-std::vector<T> generaDati();
+std::vector<T> generaDati() {};
 
 std::vector<int> generaInt();
 

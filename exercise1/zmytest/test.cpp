@@ -184,7 +184,6 @@ template <typename T>
 void menuQueue(lasd::Queue<T>& que) {
     NextActionQueue:
     std::cout << "\n\n~*~#~*~ Menù Queue ~*~#~*~" << std::endl;
-    std::cout << "1: Stampa Queue" << std::endl;
     std::cout << "1: Size" << std::endl;
     std::cout << "2: Empty" << std::endl;
     std::cout << "3: Enqueue" << std::endl;
@@ -755,10 +754,6 @@ void popolaQue(lasd::Queue<std::string>& que) {
 
 
 //Generatori
-template <typename T>
-std::vector<T> generaDati() {}
-
-
 std::vector<int> generaInt() {
     std::default_random_engine generator(std::random_device{}());
     std::uniform_int_distribution<int> distx(0, 100);
