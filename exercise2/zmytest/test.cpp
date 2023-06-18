@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <random>
+#include <climits>
 
 //menu principale
 void test() {
@@ -1174,7 +1175,7 @@ std::vector<std::string> generaString(unsigned long dim) {
         std::string str = "";
         int charsToGenerate = distr(generator);
         while(str.length()<charsToGenerate || str.length() < 4) {
-            str.append(charset[distr(generator)]);
+            str+=(charset[distr(generator)]);
         }
         vec.push_back(str);
     }
